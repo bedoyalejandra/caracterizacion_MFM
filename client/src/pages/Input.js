@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import FormInput from "../components/Form";
 import Types from "../components/Types";
 import Categories from "../components/Categories";
+import TypeBreed from "../components/TypeBreed";
 import '../index.css';
 import "bootstrap/dist/css/bootstrap.css";
 import { Button, Form, Navbar, NavDropdown, Nav, FormControl } from "react-bootstrap";
@@ -45,7 +46,7 @@ class Input extends Component {
         
         { this.state.condition === "types" ? <Types /> :
         this.state.condition === "category" ? <Categories/> :
-        this.state.condition === "breed" ? <Types title="tipos" /> :
+        this.state.condition === "breed" ? <TypeBreed/> :
         <Types title="tipos" /> }
         </div>
       </Fragment>

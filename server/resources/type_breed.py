@@ -54,9 +54,9 @@ class TypeBreedListForType(Resource):
         return {'TypesBreeds': [type_breed.json() for type_breed in TypeBreedModel.find_by_type(id_type)]}
 
 class UpdateTypeBreed(Resource):
-    def put(self, name):
+    def put(self, id):
 
-        value = TypeBreedModel.query.filter(TypeBreedModel.name == name).first()
+        value = TypeBreedModel.query.filter(TypeBreedModel.id == id).first()
 
         if value:
             data = request.get_json() 

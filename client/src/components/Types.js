@@ -162,9 +162,6 @@ class Types extends Component {
         </Card>
 
         <Modal isOpen={this.state.modalInsert}>
-          <ModalHeader style={{ display: "block" }}>
-            <span style={{ float: "right" }}>x</span>
-          </ModalHeader>
           <ModalBody>
             <div className="form-group">
               <label htmlFor="id">Id</label>

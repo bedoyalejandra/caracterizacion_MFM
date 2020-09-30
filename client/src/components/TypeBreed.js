@@ -6,28 +6,41 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import "../styles/Input.css";
-import { FaBeer } from 'react-icons/fa';
-import { GoPlus } from 'react-icons/go';
+import { FaBeer } from "react-icons/fa";
+import { GoPlus } from "react-icons/go";
 
 const url = "http://localhost:3000/";
 
-class Categories extends Component {
+class TypeBreed extends Component {
   state = {
     data: [],
+    types: [],
     modalInsert: false,
     modalDelete: false,
     form: {
       id: "",
+      id_type: "",
       name: "",
     },
     typeModal: "",
   };
 
+  requestGetTypes = () => {
+    axios
+      .get(url + "types")
+      .then((response) => {
+        this.setState({ types: response.data.Types });
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
   requestGet = () => {
     axios
-      .get(url + "categories")
+      .get(url + "types_breeds")
       .then((response) => {
-        this.setState({ data: response.data.Categories });
+        this.setState({ data: response.data.TypesBreeds });
       })
       .catch((error) => {
         console.log(error.message);
@@ -37,7 +50,7 @@ class Categories extends Component {
   requestPost = async () => {
     delete this.state.form.id;
     await axios
-      .post(url + "category/" + this.state.form.name)
+      .post(url + "type_breed/" + this.state.form.name, this.state.form)
       .then((response) => {
         this.modalInsert();
         this.requestGet();
@@ -49,7 +62,7 @@ class Categories extends Component {
 
   requestPut = async () => {
     axios
-      .put(url + "update_category/" + this.state.form.id, this.state.form)
+      .put(url + "update_type_breed/" + this.state.form.id, this.state.form)
       .then((response) => {
         this.modalInsert();
         this.requestGet();
@@ -60,24 +73,28 @@ class Categories extends Component {
   };
 
   requestDelete = async () => {
-    axios.delete(url + "category/" + this.state.form.name).then((response) => {
-      this.setState({ modalDelete: false });
-      this.requestGet();
-    });
+    axios
+      .delete(url + "type_breed/" + this.state.form.name)
+      .then((response) => {
+        this.setState({ modalDelete: false });
+        this.requestGet();
+      });
   };
 
-  selectCategory = (category) => {
+  selectTypeBreed = (type_breed) => {
     this.setState({
       typeModal: "Update",
       form: {
-        id: category.id,
-        name: category.name,
+        id: type_breed.id,
+        id_type: type_breed.id_type,
+        name: type_breed.name,
       },
     });
   };
 
   componentDidMount() {
     this.requestGet();
+    this.requestGetTypes();
   }
 
   modalInsert = () => {
@@ -99,12 +116,12 @@ class Categories extends Component {
     const { form } = this.state;
     return (
       <div className="App">
-        <Card className="text-center" style={{ width: '40rem' }}>
+        <Card className="text-center" style={{ width: "40rem" }}>
           <Card.Body>
             <div className="container">
               <br />
               <div className="container_title">
-                <h1>CATEGORÍAS</h1>
+                <h1>RAZAS</h1>
                 <button
                   className="btn btn-outline-danger"
                   onClick={() => {
@@ -116,26 +133,28 @@ class Categories extends Component {
                 </button>
               </div>
               <br />
-           
+
               <table striped hover>
                 <thead>
                   <tr>
                     <th className="w-25 p-3">Id</th>
+                    <th className="w-25 p-3">Tipo</th>
                     <th className="w-25 p-3">Nombre</th>
                     <th className="w-25 p-3">Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {this.state.data.map((category) => {
+                  {this.state.data.map((type_breed) => {
                     return (
                       <tr>
-                        <td>{category.id}</td>
-                        <td>{category.name}</td>
+                        <td>{type_breed.id}</td>
+                        <td>{type_breed.id_type}</td>
+                        <td>{type_breed.name}</td>
                         <td>
                           <button
                             className="btn btn-primary"
                             onClick={() => {
-                              this.selectCategory(category);
+                              this.selectTypeBreed(type_breed);
                               this.modalInsert();
                             }}
                           >
@@ -145,7 +164,7 @@ class Categories extends Component {
                           <button
                             className="btn btn-danger"
                             onClick={() => {
-                              this.selectCategory(category);
+                              this.selectTypeBreed(type_breed);
                               this.setState({ modalDelete: true });
                             }}
                           >
@@ -174,6 +193,19 @@ class Categories extends Component {
                 onChange={this.handleChange}
                 value={form ? form.id : this.state.data.length + 2}
               />
+              <br />
+              <label htmlFor="name">Tipo</label>
+              <Form.Control
+                as="select"
+                className="mr-sm-2"
+                id="id_type"
+                value={form ? form.id_type : ""}
+                custom
+              >
+                {this.state.types.map((type) => {
+                  return <option value={type.id}>{type.name}</option>;
+                })}
+              </Form.Control>
               <br />
               <label htmlFor="name">Nombre</label>
               <input
@@ -236,4 +268,4 @@ class Categories extends Component {
   }
 }
 
-export default Categories;
+export default TypeBreed;

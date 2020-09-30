@@ -14,7 +14,7 @@ class TypeBreedModel(db.Model):
         self.id_type = id_type
 
     def json(self):
-        return {"id_type" : self.id_type, "name" : self.name}
+        return {"id": self.id, "id_type" : self.id_type, "name" : self.name}
 
     @classmethod
     def find_by_name(cls, name):
