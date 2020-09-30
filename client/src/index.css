@@ -1,6 +1,16 @@
 html {
     min-height: 100%;
   }
+  
+  .cont {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: stretch;
+  }
+
   body {
     margin: 0;
     padding: 0;
@@ -10,7 +20,7 @@ html {
     padding-bottom: 5rem;
   }
   h1, h2  {
-    color: white;
+    color: black;
     padding: 3rem 0;
     text-align: center;
   

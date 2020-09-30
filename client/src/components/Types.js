@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Button, Form, Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
-import { Modal, ModalBody, ModalFooter, ModalHeader, Card } from "reactstrap";
+import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 
 const url = "http://localhost:3000/";
 
@@ -95,7 +96,8 @@ class Types extends Component {
     const { form } = this.state;
     return (
       <div className="App">
-    
+        <Card className="text-center" style={{ width: '18rem' }}>
+          <Card.Body>
             <br />
             <button
               className="btn btn-primary"
@@ -148,8 +150,10 @@ class Types extends Component {
                 })}
               </tbody>
             </table>
-    
-        <ModalBody isOpen={this.state.modalInsert}>
+            </Card.Body>
+        </Card>
+
+        <Modal isOpen={this.state.modalInsert}>
           <ModalHeader style={{ display: "block" }}>
             <span style={{ float: "right" }}>x</span>
           </ModalHeader>
@@ -222,7 +226,7 @@ class Types extends Component {
             </button>
           </ModalFooter>
         </Modal>
-       
+    
       </div>
     );
   }

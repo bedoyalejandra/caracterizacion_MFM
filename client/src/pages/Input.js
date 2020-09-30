@@ -1,18 +1,16 @@
 import React, { Component, Fragment } from "react";
 import FormInput from "../components/Form";
 import Types from "../components/Types";
-
+import '../index.css';
 import "bootstrap/dist/css/bootstrap.css";
 import { Button, Form, Navbar, NavDropdown, Nav, FormControl } from "react-bootstrap";
 
 
 class Input extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: "",
-    };
+  state = {
+    condition: ''
   }
+
   render() {
     return (
       <Fragment>
@@ -23,16 +21,32 @@ class Input extends Component {
             <Nav className="mr-auto">     
             </Nav>
             <Form inline>
-              <FormControl
-                type="text"
-                placeholder="Search"
-                className="mr-sm-2"
-              />
-              <Button variant="outline-success">Search</Button>
+            
+              <Button variant="danger" onClick={() => 
+                this.setState({condition: "type" })}>Tipos</Button>
+              
+              <Button variant="danger" onClick={() => 
+                this.setState({condition: "category" })}>Categorías</Button>
+              
+              <Button variant="danger" onClick={() => 
+                this.setState({condition: "breed" })}>Razas</Button>
+              
+              <Button variant="danger" onClick={() => 
+                this.setState({condition: "feature" })}>Características</Button>
+      
             </Form>
           </Navbar.Collapse>
         </Navbar>
-        <Types title="tipos" />
+
+        
+
+        <div className="cont">
+        
+        { this.state.condition === "types" ? <Types /> :
+        this.state.condition === "category" ? <FormInput title="Category" /> :
+        this.state.condition === "breed" ? <Types title="tipos" /> :
+        <Types title="tipos" /> }
+        </div>
       </Fragment>
     );
   }
