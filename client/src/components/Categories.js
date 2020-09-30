@@ -11,7 +11,7 @@ import { GoPlus } from 'react-icons/go';
 
 const url = "http://localhost:3000/";
 
-class Types extends Component {
+class Categories extends Component {
   state = {
     data: [],
     modalInsert: false,
@@ -25,9 +25,9 @@ class Types extends Component {
 
   requestGet = () => {
     axios
-      .get(url + "types")
+      .get(url + "categories")
       .then((response) => {
-        this.setState({ data: response.data.Types });
+        this.setState({ data: response.data.Categories });
       })
       .catch((error) => {
         console.log(error.message);
@@ -37,7 +37,7 @@ class Types extends Component {
   requestPost = async () => {
     delete this.state.form.id;
     await axios
-      .post(url + "type/" + this.state.form.name)
+      .post(url + "category/" + this.state.form.name)
       .then((response) => {
         this.modalInsert();
         this.requestGet();
@@ -49,7 +49,7 @@ class Types extends Component {
 
   requestPut = async () => {
     axios
-      .put(url + "update_type/" + this.state.form.id, this.state.form)
+      .put(url + "update_category/" + this.state.form.id, this.state.form)
       .then((response) => {
         this.modalInsert();
         this.requestGet();
@@ -60,18 +60,18 @@ class Types extends Component {
   };
 
   requestDelete = async () => {
-    axios.delete(url + "type/" + this.state.form.name).then((response) => {
+    axios.delete(url + "category/" + this.state.form.name).then((response) => {
       this.setState({ modalDelete: false });
       this.requestGet();
     });
   };
 
-  selectType = (type) => {
+  selectCategory = (category) => {
     this.setState({
       typeModal: "Update",
       form: {
-        id: type.id,
-        name: type.name,
+        id: category.id,
+        name: category.name,
       },
     });
   };
@@ -104,7 +104,7 @@ class Types extends Component {
             <div className="container">
               <br />
               <div className="container_title">
-                <h1>TIPOS</h1>
+                <h1>CATEGORÍAS</h1>
                 <button
                   className="btn btn-outline-danger"
                   onClick={() => {
@@ -126,16 +126,16 @@ class Types extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {this.state.data.map((type) => {
+                  {this.state.data.map((category) => {
                     return (
                       <tr>
-                        <td>{type.id}</td>
-                        <td>{type.name}</td>
+                        <td>{category.id}</td>
+                        <td>{category.name}</td>
                         <td>
                           <button
                             className="btn btn-primary"
                             onClick={() => {
-                              this.selectType(type);
+                              this.selectCategory(category);
                               this.modalInsert();
                             }}
                           >
@@ -145,7 +145,7 @@ class Types extends Component {
                           <button
                             className="btn btn-danger"
                             onClick={() => {
-                              this.selectType(type);
+                              this.selectCategory(category);
                               this.setState({ modalDelete: true });
                             }}
                           >
@@ -239,4 +239,4 @@ class Types extends Component {
   }
 }
 
-export default Types;
+export default Categories;

@@ -34,7 +34,7 @@ api.add_resource(UpdateType, '/update_type/<string:id>')
 
 api.add_resource(Category, '/category/<string:name>')
 api.add_resource(CategoryList, '/categories')
-api.add_resource(UpdateCategory, '/update_category/<string:name>')
+api.add_resource(UpdateCategory, '/update_category/<string:id>')
 
 api.add_resource(TypeBreed, '/type_breed/<string:name>')
 api.add_resource(TypeBreedList, '/types_breeds')

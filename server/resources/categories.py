@@ -43,9 +43,9 @@ class CategoryList(Resource):
         return {'Categories': [category.json() for category in CategoriesModel.query.all()]}
 
 class UpdateCategory(Resource):
-    def put(self, name):
+    def put(self, id):
 
-        value = CategoriesModel.query.filter(CategoriesModel.name == name).first()
+        value = CategoriesModel.query.filter(CategoriesModel.id == id).first()
 
         if value:
             data = request.get_json() 
@@ -55,4 +55,5 @@ class UpdateCategory(Resource):
             return ({"Message":"category updated!"})
         else:
             return 'error'
+        
         
