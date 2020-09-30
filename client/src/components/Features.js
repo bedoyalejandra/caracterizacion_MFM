@@ -11,26 +11,26 @@ import { GoPlus } from "react-icons/go";
 
 const url = "http://localhost:3000/";
 
-class TypeBreed extends Component {
+class Features extends Component {
   state = {
     data: [],
-    types: [],
+    categories: [],
     modalInsert: false,
     modalDelete: false,
     message: "",
     form: {
       id: "",
-      id_type: "",
+      id_category: "",
       name: "",
     },
     typeModal: "",
   };
 
-  requestGetTypes = () => {
+  requestGetCategories = () => {
     axios
-      .get(url + "types")
+      .get(url + "categories")
       .then((response) => {
-        this.setState({ types: response.data.Types });
+        this.setState({ categories: response.data.Categories });
       })
       .catch((error) => {
         console.log(error.message);
@@ -39,9 +39,9 @@ class TypeBreed extends Component {
 
   requestGet = () => {
     axios
-      .get(url + "types_breeds")
+      .get(url + "features")
       .then((response) => {
-        this.setState({ data: response.data.TypesBreeds });
+        this.setState({ data: response.data.Features });
       })
       .catch((error) => {
         console.log(error.message);
@@ -50,30 +50,30 @@ class TypeBreed extends Component {
 
   requestPost = async () => {
     if (!this.state.form) {
-      this.setState({ message: "El nombre y el tipo son obligatorios" });
+      this.setState({ message: "El nombre y la categoría son obligatorios" });
       return
     }
-    delete this.state.form.id;
-    await axios
-      .post(url + "type_breed/" + this.state.form.name, this.state.form)
-      .then((response) => {
-
-        this.modalInsert();
-        this.requestGet();
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
+    
+      delete this.state.form.id;
+      await axios
+        .post(url + "feature/" + this.state.form.name, this.state.form)
+        .then((response) => {
+          this.modalInsert();
+          this.requestGet();
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    
   };
 
   requestPut = async () => {
     if(this.state.form.name == '' || this.state.form.id_type == ''){
-      this.setState({ message: "El nombre y el tipo son obligatorios" });
+      this.setState({ message: "El nombre y la categoría son obligatorios" });
       return
     }
-
     axios
-      .put(url + "update_type_breed/" + this.state.form.id, this.state.form)
+      .put(url + "update_feature/" + this.state.form.id, this.state.form)
       .then((response) => {
         this.modalInsert();
         this.requestGet();
@@ -84,28 +84,26 @@ class TypeBreed extends Component {
   };
 
   requestDelete = async () => {
-    axios
-      .delete(url + "type_breed/" + this.state.form.name)
-      .then((response) => {
-        this.setState({ modalDelete: false });
-        this.requestGet();
-      });
+    axios.delete(url + "feature/" + this.state.form.name).then((response) => {
+      this.setState({ modalDelete: false });
+      this.requestGet();
+    });
   };
 
-  selectTypeBreed = (type_breed) => {
+  selectFeature = (feature) => {
     this.setState({
       typeModal: "Update",
       form: {
-        id: type_breed.id,
-        id_type: type_breed.id_type,
-        name: type_breed.name,
+        id: feature.id,
+        id_category: feature.id_category,
+        name: feature.name,
       },
     });
   };
 
   componentDidMount() {
     this.requestGet();
-    this.requestGetTypes();
+    this.requestGetCategories();
   }
 
   modalInsert = () => {
@@ -131,7 +129,7 @@ class TypeBreed extends Component {
             <div className="container">
               <br />
               <div className="container_title">
-                <h1>RAZAS</h1>
+                <h1>CARACTERÍSTICAS</h1>
                 <button
                   className="btn btn-outline-danger"
                   onClick={() => {
@@ -148,23 +146,23 @@ class TypeBreed extends Component {
                 <thead>
                   <tr>
                     <th className="w-25 p-3">Id</th>
-                    <th className="w-25 p-3">Tipo</th>
+                    <th className="w-25 p-3">Categoría</th>
                     <th className="w-25 p-3">Nombre</th>
                     <th className="w-25 p-3">Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {this.state.data.map((type_breed) => {
+                  {this.state.data.map((feature) => {
                     return (
                       <tr>
-                        <td>{type_breed.id}</td>
-                        <td>{type_breed.id_type}</td>
-                        <td>{type_breed.name}</td>
+                        <td>{feature.id}</td>
+                        <td>{feature.id_category}</td>
+                        <td>{feature.name}</td>
                         <td>
                           <button
                             className="btn btn-primary"
                             onClick={() => {
-                              this.selectTypeBreed(type_breed);
+                              this.selectFeature(feature);
                               this.modalInsert();
                             }}
                           >
@@ -174,7 +172,7 @@ class TypeBreed extends Component {
                           <button
                             className="btn btn-danger"
                             onClick={() => {
-                              this.selectTypeBreed(type_breed);
+                              this.selectFeature(feature);
                               this.setState({ modalDelete: true });
                             }}
                           >
@@ -192,9 +190,8 @@ class TypeBreed extends Component {
 
         <Modal isOpen={this.state.modalInsert}>
           <ModalBody>
-          <div className="error">{this.state.message}</div>
+            <div className="error">{this.state.message}</div>
             <div className="form-group">
-        
               <label htmlFor="id">Id</label>
               <input
                 className="form-control"
@@ -206,19 +203,19 @@ class TypeBreed extends Component {
                 value={form ? form.id : this.state.data.length + 2}
               />
               <br />
-              <label htmlFor="id_type">Tipo</label>
+              <label htmlFor="name">Categoría</label>
               <Form.Control
                 as="select"
                 className="mr-sm-2"
-                id="id_type"
-                name="id_type"
-                value={form ? form.id_type : ""}
+                id="id_category"
+                name="id_category"
+                value={form ? form.id_category : ""}
                 onChange={this.handleChange}
                 custom
               >
                 <option disabled>Seleccione una opción</option>;
-                {this.state.types.map((type) => {
-                  return <option value={type.id} >{type.name}</option>;
+                {this.state.categories.map((category) => {
+                  return <option value={category.id}>{category.name}</option>;
                 })}
               </Form.Control>
               <br />
@@ -283,4 +280,4 @@ class TypeBreed extends Component {
   }
 }
 
-export default TypeBreed;
+export default Features;

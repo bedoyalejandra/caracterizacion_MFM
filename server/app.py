@@ -25,7 +25,7 @@ db.init_app(app)
 
 api.add_resource(Feature, '/feature/<string:name>')
 api.add_resource(FeatureList, '/features')
-api.add_resource(UpdateFeature, '/update_feature/<string:name>')
+api.add_resource(UpdateFeature, '/update_feature/<string:id>')
 api.add_resource(FeatureListForCategory, '/feature_for_category/<string:id_category>')
 
 api.add_resource(Type, '/type/<string:name>')

@@ -16,6 +16,7 @@ class Types extends Component {
     data: [],
     modalInsert: false,
     modalDelete: false,
+    message: "",
     form: {
       id: "",
       name: "",
@@ -35,6 +36,10 @@ class Types extends Component {
   };
 
   requestPost = async () => {
+    if (!this.state.form) {
+      this.setState({ message: "El nombre es obligatorio" });
+      return
+    }
     delete this.state.form.id;
     await axios
       .post(url + "type/" + this.state.form.name)
@@ -48,6 +53,10 @@ class Types extends Component {
   };
 
   requestPut = async () => {
+    if(this.state.form.name == ''){
+      this.setState({ message: "El nombre es obligatorio" });
+      return
+    }
     axios
       .put(url + "update_type/" + this.state.form.id, this.state.form)
       .then((response) => {
@@ -92,7 +101,6 @@ class Types extends Component {
         [e.target.name]: e.target.value,
       },
     });
-    console.log(this.state.form);
   };
 
   render() {
@@ -163,6 +171,7 @@ class Types extends Component {
 
         <Modal isOpen={this.state.modalInsert}>
           <ModalBody>
+          <div className="error">{this.state.message}</div>
             <div className="form-group">
               <label htmlFor="id">Id</label>
               <input

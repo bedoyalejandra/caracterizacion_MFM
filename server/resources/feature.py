@@ -49,9 +49,9 @@ class FeatureListForCategory(Resource):
         return {'Features': [feature.json() for feature in FeatureModel.find_by_category(id_category)]}
 
 class UpdateFeature(Resource):
-    def put(self, name):
+    def put(self, id):
 
-        value = FeatureModel.query.filter(FeatureModel.name == name).first()
+        value = FeatureModel.query.filter(FeatureModel.id == id).first()
 
         if value:
             data = request.get_json() 

@@ -16,6 +16,7 @@ class Categories extends Component {
     data: [],
     modalInsert: false,
     modalDelete: false,
+    message: "",
     form: {
       id: "",
       name: "",
@@ -35,6 +36,10 @@ class Categories extends Component {
   };
 
   requestPost = async () => {
+    if (!this.state.form) {
+      this.setState({ message: "El nombre es obligatorio" });
+      return
+    }
     delete this.state.form.id;
     await axios
       .post(url + "category/" + this.state.form.name)
@@ -48,6 +53,10 @@ class Categories extends Component {
   };
 
   requestPut = async () => {
+    if(this.state.form.name == ''){
+      this.setState({ message: "El nombre es obligatorio" });
+      return
+    }
     axios
       .put(url + "update_category/" + this.state.form.id, this.state.form)
       .then((response) => {
@@ -92,7 +101,6 @@ class Categories extends Component {
         [e.target.name]: e.target.value,
       },
     });
-    console.log(this.state.form);
   };
 
   render() {
@@ -163,6 +171,7 @@ class Categories extends Component {
 
         <Modal isOpen={this.state.modalInsert}>
           <ModalBody>
+          <div className="error">{this.state.message}</div>
             <div className="form-group">
               <label htmlFor="id">Id</label>
               <input

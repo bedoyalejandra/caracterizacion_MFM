@@ -14,7 +14,7 @@ class FeatureModel(db.Model):
         self.id_category = id_category
 
     def json(self):
-        return {"id_category" : self.id_category, "name" : self.name}
+        return {"id": self.id, "id_category" : self.id_category, "name" : self.name}
 
     @classmethod
     def find_by_name(cls,name):
