@@ -44,9 +44,9 @@ class TypeList(Resource):
         return {'Types': [type.json() for type in TypeModel.query.all()]}
 
 class UpdateType(Resource):
-    def put(self, name):
+    def put(self, id):
 
-        value = TypeModel.query.filter(TypeModel.name == name).first()
+        value = TypeModel.query.filter(TypeModel.id == id).first()
 
         if value:
             data = request.get_json() 

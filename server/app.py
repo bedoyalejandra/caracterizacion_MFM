@@ -5,9 +5,11 @@ from resources.type import Type, TypeList, UpdateType
 from resources.categories import Category, CategoryList, UpdateCategory
 from resources.type_breed import TypeBreed, TypeBreedList, TypeBreedListForType, UpdateTypeBreed
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 
 # init app
 app = Flask(__name__)
+CORS(app)
 # database
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:7034@localhost:5432/MFM"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -28,7 +30,7 @@ api.add_resource(FeatureListForCategory, '/feature_for_category/<string:id_categ
 
 api.add_resource(Type, '/type/<string:name>')
 api.add_resource(TypeList, '/types')
-api.add_resource(UpdateType, '/update_type/<string:name>')
+api.add_resource(UpdateType, '/update_type/<string:id>')
 
 api.add_resource(Category, '/category/<string:name>')
 api.add_resource(CategoryList, '/categories')
