@@ -1,8 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import FormInput from './components/Form'
-import 'bootstrap/dist/css/bootstrap.css'
+import React from "react";
+import ReactDOM from "react-dom";
+import "bootstrap/dist/css/bootstrap.css";
+import App from './components/App'
+import './index.css';
+import Input from './pages/Input'
 
-ReactDOM.render(<FormInput
-                    title = "Tipos"/>,
-                    document.getElementById('root'))
+
+ReactDOM.render(
+  <div>
+    <Input />
+  </div>,
+  document.getElementById("root")
+);
