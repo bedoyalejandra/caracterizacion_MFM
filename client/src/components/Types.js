@@ -53,7 +53,7 @@ class Types extends Component {
   };
 
   requestPut = async () => {
-    if(this.state.form.name == ''){
+    if(this.state.form.name === ''){
       this.setState({ message: "El nombre es obligatorio" });
       return
     }
@@ -165,6 +165,8 @@ class Types extends Component {
                   })}
                 </tbody>
               </table>
+              <br />
+      
             </div>
           </Card.Body>
         </Card>
@@ -240,6 +242,7 @@ class Types extends Component {
             </button>
           </ModalFooter>
         </Modal>
+        
       </div>
     );
   }

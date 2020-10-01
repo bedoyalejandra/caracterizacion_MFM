@@ -68,7 +68,7 @@ class Features extends Component {
   };
 
   requestPut = async () => {
-    if(this.state.form.name == '' || this.state.form.id_type == ''){
+    if(this.state.form.name === '' || this.state.form.id_type === ''){
       this.setState({ message: "El nombre y la categoría son obligatorios" });
       return
     }
@@ -137,7 +137,7 @@ class Features extends Component {
                     this.modalInsert();
                   }}
                 >
-                  <GoPlus />
+                  <GoPlus/>
                 </button>
               </div>
               <br />
@@ -185,6 +185,8 @@ class Features extends Component {
                 </tbody>
               </table>
             </div>
+            <br />
+
           </Card.Body>
         </Card>
 

@@ -67,7 +67,7 @@ class TypeBreed extends Component {
   };
 
   requestPut = async () => {
-    if(this.state.form.name == '' || this.state.form.id_type == ''){
+    if(this.state.form.name === '' || this.state.form.id_type === ''){
       this.setState({ message: "El nombre y el tipo son obligatorios" });
       return
     }
@@ -187,6 +187,8 @@ class TypeBreed extends Component {
                 </tbody>
               </table>
             </div>
+            <br />
+
           </Card.Body>
         </Card>
 

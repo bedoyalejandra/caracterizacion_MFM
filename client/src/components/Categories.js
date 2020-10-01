@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import "../styles/Input.css";
-import { FaBeer } from 'react-icons/fa';
-import { GoPlus } from 'react-icons/go';
+import { FaBeer } from "react-icons/fa";
+import { GoPlus } from "react-icons/go";
 
 const url = "http://localhost:3000/";
 
@@ -38,7 +38,7 @@ class Categories extends Component {
   requestPost = async () => {
     if (!this.state.form) {
       this.setState({ message: "El nombre es obligatorio" });
-      return
+      return;
     }
     delete this.state.form.id;
     await axios
@@ -53,9 +53,9 @@ class Categories extends Component {
   };
 
   requestPut = async () => {
-    if(this.state.form.name == ''){
+    if (this.state.form.name === "") {
       this.setState({ message: "El nombre es obligatorio" });
-      return
+      return;
     }
     axios
       .put(url + "update_category/" + this.state.form.id, this.state.form)
@@ -107,7 +107,9 @@ class Categories extends Component {
     const { form } = this.state;
     return (
       <div className="App">
-        <Card className="text-center" style={{ width: '40rem' }}>
+        <br />
+        <br />
+        <Card className="text-center" style={{ width: "40rem" }}>
           <Card.Body>
             <div className="container">
               <br />
@@ -124,7 +126,7 @@ class Categories extends Component {
                 </button>
               </div>
               <br />
-           
+
               <table striped hover>
                 <thead>
                   <tr>
@@ -166,12 +168,13 @@ class Categories extends Component {
                 </tbody>
               </table>
             </div>
+            <br />
           </Card.Body>
         </Card>
 
         <Modal isOpen={this.state.modalInsert}>
           <ModalBody>
-          <div className="error">{this.state.message}</div>
+            <div className="error">{this.state.message}</div>
             <div className="form-group">
               <label htmlFor="id">Id</label>
               <input
