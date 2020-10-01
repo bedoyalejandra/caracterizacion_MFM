@@ -42,7 +42,7 @@ class TypeBreed extends Component {
     axios
       .get(url + "types_breeds")
       .then((response) => {
-        this.setState({ data: response.data.TypesBreeds });
+        this.setState({ data: response.data});
       })
       .catch((error) => {
         console.log(error.message);
@@ -52,13 +52,12 @@ class TypeBreed extends Component {
   requestPost = async () => {
     if (!this.state.form) {
       this.setState({ message: "El nombre y el tipo son obligatorios" });
-      return
+      return;
     }
     delete this.state.form.id;
     await axios
       .post(url + "type_breed/" + this.state.form.name, this.state.form)
       .then((response) => {
-
         this.modalInsert();
         this.requestGet();
       })
@@ -68,9 +67,9 @@ class TypeBreed extends Component {
   };
 
   requestPut = async () => {
-    if(this.state.form.name === '' || this.state.form.id_type === ''){
+    if (this.state.form.name === "" || this.state.form.id_type === "") {
       this.setState({ message: "El nombre y el tipo son obligatorios" });
-      return
+      return;
     }
 
     axios
@@ -127,14 +126,14 @@ class TypeBreed extends Component {
     const { form } = this.state;
     return (
       <div className="App">
-            <br />
+        <br />
         <br />
         <Card className="text-center" style={{ width: "40rem" }}>
           <Card.Body>
             <div className="container">
               <br />
               <div className="container_title">
-              <img src={ImgCat} height="50" />
+                <img src={ImgCat} height="50" />
                 <h1>RAZAS</h1>
                 <div className="span">***</div>
                 <button
@@ -163,7 +162,7 @@ class TypeBreed extends Component {
                     return (
                       <tr>
                         <td>{type_breed.id}</td>
-                        <td>{type_breed.id_type}</td>
+                        <td>{type_breed.name_type}</td>
                         <td>{type_breed.name}</td>
                         <td>
                           <button
@@ -193,15 +192,13 @@ class TypeBreed extends Component {
               </table>
             </div>
             <br />
-
           </Card.Body>
         </Card>
 
         <Modal isOpen={this.state.modalInsert} centered>
           <ModalBody>
-          <div className="error">{this.state.message}</div>
+            <div className="error">{this.state.message}</div>
             <div className="form-group">
-        
               <label htmlFor="id">Id</label>
               <input
                 className="form-control"
@@ -225,7 +222,7 @@ class TypeBreed extends Component {
               >
                 <option disabled>Seleccione una opción</option>;
                 {this.state.types.map((type) => {
-                  return <option value={type.id} >{type.name}</option>;
+                  return <option value={type.id}>{type.name}</option>;
                 })}
               </Form.Control>
               <br />
@@ -239,7 +236,6 @@ class TypeBreed extends Component {
                 onChange={this.handleChange}
                 value={form ? form.name : ""}
               />
-           
             </div>
           </ModalBody>
           <ModalFooter>

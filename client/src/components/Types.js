@@ -176,7 +176,7 @@ class Types extends Component {
 
         <Modal isOpen={this.state.modalInsert} centered>
           <ModalBody>
-            <div className="alerta-error">{this.state.message}</div>
+            <div className="error">{this.state.message}</div>
             <div className="form-group">
               <label>Id</label>
               <input

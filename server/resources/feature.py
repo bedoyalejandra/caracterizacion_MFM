@@ -2,6 +2,7 @@ import sqlite3
 from flask import Flask, request
 from flask_restful import Resource, reqparse
 from models.feature import FeatureModel
+from models.categories import CategoriesModel
 from db import db
 
 class Feature(Resource):
@@ -39,10 +40,27 @@ class Feature(Resource):
         if feature:
             feature.delete_from_db()
         return ({"Message":"feature deleted!"})
-    
+
+
+class FeatureList(Resource):
+    def get(self):
+        value = FeatureModel.query.join(CategoriesModel, FeatureModel.id_category == CategoriesModel.id).with_entities(FeatureModel.id, CategoriesModel.id, CategoriesModel.name, FeatureModel.name).all()
+        result = []
+        if value:
+            for val in value:
+                result.append({
+                    "id": val[0],
+                    "id_category": val[1],
+                    "name_category": val[2],
+                    "name": val[3]
+                })            
+            return result
+"""
+
 class FeatureList(Resource):
     def get(self):
         return {'Features': [feature.json() for feature in FeatureModel.query.all()]}
+"""
 
 class FeatureListForCategory(Resource):
     def get(self, id_category):

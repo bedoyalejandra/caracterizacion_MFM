@@ -6,7 +6,7 @@ class TypeBreedModel(db.Model):
     __tablename__ = 'type_breed'
 
     id = db.Column(db.Integer, primary_key = True)
-    id_type = db.Column(db.Integer)
+    id_type = db.Column(db.Integer, db.ForeignKey('types.id'))
     name = db.Column(db.String(200), unique = True)
 
     def __init__(self, id_type, name):

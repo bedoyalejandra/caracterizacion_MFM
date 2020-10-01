@@ -38,12 +38,11 @@ h2 {
 
 
 
-.alerta-error {
+.error {
   background-color: white;
-  color: #E61E54;
+  color: red;
   padding: 1rem;
-  font-size: 2rem;
-  text-transform: uppercase;
+  font-size: 15px;
   text-align: center;
-  font-family: "Staatliches", cursive;
+ 
 }

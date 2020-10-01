@@ -39,16 +39,26 @@ class TypeBreed(Resource):
             type_breed.delete_from_db()
         return ({"Message":"type_breed deleted!"})
 
- 
-#class TypeBreedList(Resource):
-#    def get(self):
-#        return {'TypesBreeds': [type_breed.json() for type_breed in TypeBreedModel.query.join(TypeModel.name, TypeBreedModel.id_type == TypeModel.id).all()]}
-
 
 class TypeBreedList(Resource):
     def get(self):
+        #return {'TypesBreeds':  TypeBreedModel.query.join(TypeModel, TypeBreedModel.id_type == TypeModel.id).with_entities(TypeBreedModel.id, TypeModel.name, TypeBreedModel.name).all()}
+        value = TypeBreedModel.query.join(TypeModel, TypeBreedModel.id_type == TypeModel.id).with_entities(TypeBreedModel.id, TypeModel.id, TypeModel.name, TypeBreedModel.name).all()
+        result = []
+        if value:
+            for val in value:
+                result.append({
+                    "id": val[0],
+                    "id_type": val[1],
+                    "name_type": val[2],
+                    "name": val[3]
+                })            
+            return result
+"""
+class TypeBreedList(Resource):
+    def get(self):
         return {'TypesBreeds': [type_breed.json() for type_breed in TypeBreedModel.query.all()]}
-
+"""
 class TypeBreedListForType(Resource):
     def get(self, id_type):
         return {'TypesBreeds': [type_breed.json() for type_breed in TypeBreedModel.find_by_type(id_type)]}

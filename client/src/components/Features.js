@@ -42,7 +42,7 @@ class Features extends Component {
     axios
       .get(url + "features")
       .then((response) => {
-        this.setState({ data: response.data.Features });
+        this.setState({ data: response.data });
       })
       .catch((error) => {
         console.log(error.message);
@@ -161,7 +161,7 @@ class Features extends Component {
                     return (
                       <tr>
                         <td>{feature.id}</td>
-                        <td>{feature.id_category}</td>
+                        <td>{feature.name_category}</td>
                         <td>{feature.name}</td>
                         <td>
                           <button
