@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Button, Form, Card } from "react-bootstrap";
+import { Form, Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
-import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import { Modal, ModalBody, ModalFooter } from "reactstrap";
 import "../styles/Input.css";
-import { FaBeer } from "react-icons/fa";
 import { GoPlus } from "react-icons/go";
 import ImgDog from "../images/animals/dog.png";
 
@@ -131,7 +130,7 @@ class Features extends Component {
         <Card className="text-center" style={{ width: "40rem" }}>
           <Card.Body>
             <div className="container">
-              
+            <br />
               <div className="container_title">
               <img src={ImgDog} height="50" />
                 <h1>CARACTERÍSTICAS</h1>

@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Button, Form, Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import "../styles/Input.css";
-import { FaBeer } from "react-icons/fa";
 import { GoPlus } from "react-icons/go";
 import ImgHamster from "../images/animals/hamster.png";
 
