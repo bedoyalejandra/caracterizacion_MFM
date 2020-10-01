@@ -6,8 +6,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import "../styles/Input.css";
-import { FaBeer } from 'react-icons/fa';
-import { GoPlus } from 'react-icons/go';
+import { FaBeer } from "react-icons/fa";
+import { GoPlus } from "react-icons/go";
+import ImgRabbit from "../images/animals/rabbit.png";
 
 const url = "http://localhost:3000/";
 
@@ -38,7 +39,7 @@ class Types extends Component {
   requestPost = async () => {
     if (!this.state.form) {
       this.setState({ message: "El nombre es obligatorio" });
-      return
+      return;
     }
     delete this.state.form.id;
     await axios
@@ -53,9 +54,9 @@ class Types extends Component {
   };
 
   requestPut = async () => {
-    if(this.state.form.name === ''){
+    if (this.state.form.name === "") {
       this.setState({ message: "El nombre es obligatorio" });
-      return
+      return;
     }
     axios
       .put(url + "update_type/" + this.state.form.id, this.state.form)
@@ -107,12 +108,16 @@ class Types extends Component {
     const { form } = this.state;
     return (
       <div className="App">
-        <Card className="text-center" style={{ width: '40rem' }}>
+            <br />
+        <br />
+        <Card className="text-center" style={{ width: "40rem" }}>
           <Card.Body>
+            <br />
             <div className="container">
-              <br />
               <div className="container_title">
+                <img src={ImgRabbit} height="50" />      
                 <h1>TIPOS</h1>
+                <div className="span">***</div>
                 <button
                   className="btn btn-outline-danger"
                   onClick={() => {
@@ -124,7 +129,7 @@ class Types extends Component {
                 </button>
               </div>
               <br />
-           
+
               <table striped hover>
                 <thead>
                   <tr>
@@ -141,7 +146,7 @@ class Types extends Component {
                         <td>{type.name}</td>
                         <td>
                           <button
-                            className="btn btn-primary"
+                            className="btn btn-info"
                             onClick={() => {
                               this.selectType(type);
                               this.modalInsert();
@@ -166,16 +171,15 @@ class Types extends Component {
                 </tbody>
               </table>
               <br />
-      
             </div>
           </Card.Body>
         </Card>
 
-        <Modal isOpen={this.state.modalInsert}>
+        <Modal isOpen={this.state.modalInsert} centered>
           <ModalBody>
-          <div className="error">{this.state.message}</div>
+            <div className="alerta-error">{this.state.message}</div>
             <div className="form-group">
-              <label htmlFor="id">Id</label>
+              <label>Id</label>
               <input
                 className="form-control"
                 type="text"
@@ -195,20 +199,20 @@ class Types extends Component {
                 onChange={this.handleChange}
                 value={form ? form.name : ""}
               />
-              <br />
+              
             </div>
           </ModalBody>
           <ModalFooter>
             {this.state.typeModal === "Insert" ? (
               <button
-                className="btn btn-primary"
+                className="btn btn-info"
                 onClick={() => this.requestPost()}
               >
                 Insertar
               </button>
             ) : (
               <button
-                className="btn btn-primary"
+                className="btn btn-info"
                 onClick={() => this.requestPut()}
               >
                 Actualizar
@@ -223,7 +227,7 @@ class Types extends Component {
           </ModalFooter>
         </Modal>
 
-        <Modal isOpen={this.state.modalDelete}>
+        <Modal isOpen={this.state.modalDelete} centered>
           <ModalBody>
             ¿Estás seguro que deseas eliminar {form && form.name}?
           </ModalBody>
@@ -242,7 +246,6 @@ class Types extends Component {
             </button>
           </ModalFooter>
         </Modal>
-        
       </div>
     );
   }

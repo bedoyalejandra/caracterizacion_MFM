@@ -8,6 +8,7 @@ import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import "../styles/Input.css";
 import { FaBeer } from "react-icons/fa";
 import { GoPlus } from "react-icons/go";
+import ImgCat from "../images/animals/cat.png";
 
 const url = "http://localhost:3000/";
 
@@ -126,12 +127,16 @@ class TypeBreed extends Component {
     const { form } = this.state;
     return (
       <div className="App">
+            <br />
+        <br />
         <Card className="text-center" style={{ width: "40rem" }}>
           <Card.Body>
             <div className="container">
               <br />
               <div className="container_title">
+              <img src={ImgCat} height="50" />
                 <h1>RAZAS</h1>
+                <div className="span">***</div>
                 <button
                   className="btn btn-outline-danger"
                   onClick={() => {
@@ -162,7 +167,7 @@ class TypeBreed extends Component {
                         <td>{type_breed.name}</td>
                         <td>
                           <button
-                            className="btn btn-primary"
+                            className="btn btn-info"
                             onClick={() => {
                               this.selectTypeBreed(type_breed);
                               this.modalInsert();
@@ -192,7 +197,7 @@ class TypeBreed extends Component {
           </Card.Body>
         </Card>
 
-        <Modal isOpen={this.state.modalInsert}>
+        <Modal isOpen={this.state.modalInsert} centered>
           <ModalBody>
           <div className="error">{this.state.message}</div>
             <div className="form-group">
@@ -224,6 +229,7 @@ class TypeBreed extends Component {
                 })}
               </Form.Control>
               <br />
+              <br />
               <label htmlFor="name">Nombre</label>
               <input
                 className="form-control"
@@ -233,20 +239,20 @@ class TypeBreed extends Component {
                 onChange={this.handleChange}
                 value={form ? form.name : ""}
               />
-              <br />
+           
             </div>
           </ModalBody>
           <ModalFooter>
             {this.state.typeModal === "Insert" ? (
               <button
-                className="btn btn-primary"
+                className="btn btn-info"
                 onClick={() => this.requestPost()}
               >
                 Insertar
               </button>
             ) : (
               <button
-                className="btn btn-primary"
+                className="btn btn-info"
                 onClick={() => this.requestPut()}
               >
                 Actualizar
@@ -261,7 +267,7 @@ class TypeBreed extends Component {
           </ModalFooter>
         </Modal>
 
-        <Modal isOpen={this.state.modalDelete}>
+        <Modal isOpen={this.state.modalDelete} centered>
           <ModalBody>
             ¿Estás seguro que deseas eliminar {form && form.name}?
           </ModalBody>

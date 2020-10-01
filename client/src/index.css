@@ -3,12 +3,16 @@ html {
 }
 
 .cont {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  align-content: stretch;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: center;
+}
+
+label {
+  color: black;
 }
 
 body {
@@ -30,71 +34,13 @@ h2 {
   text-align: center;
   font-family: "Oswald", sans-serif;
 }
-.lista-citas .media {
-  border-bottom: 1px solid #e1e1e1;
-  padding-bottom: 3rem;
-}
 
-.lista-citas .media:last-of-type {
-  border-bottom: 0;
-}
-.lista-citas .media-body p {
-  margin: 0;
-}
-.lista-citas .media-body button {
-  margin-top: 1rem !important;
-}
-.lista-citas .media-body span {
-  font-weight: bold;
-}
 
-label {
-  color: white;
-}
 
-input[type="date"],
-input[type="time"] {
-  height: 38px;
-  padding: 6px 10px;
-  background-color: #fff;
-  border: 1px solid #d1d1d1;
-  border-radius: 4px;
-  box-shadow: none;
-  box-sizing: border-box;
-}
-
-.cita {
-  padding: 2rem;
-  background: white;
-  border-bottom: 1px solid #e1e1e1;
-  color: black;
-}
-
-.cita p {
-  font-weight: bold;
-  margin-bottom: 0.8rem;
-}
-.cita p span {
-  font-weight: normal;
-}
-.cita:first-of-type {
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
-}
-.cita:last-of-type {
-  border-bottom-left-radius: 1rem;
-  border-bottom-right-radius: 1rem;
-}
-.button.eliminar,
-.button.eliminar:hover {
-  background-color: #c10059;
-  color: white;
-  margin-top: 2rem;
-}
 
 .alerta-error {
   background-color: white;
-  color: red;
+  color: #E61E54;
   padding: 1rem;
   font-size: 2rem;
   text-transform: uppercase;

@@ -8,6 +8,7 @@ import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import "../styles/Input.css";
 import { FaBeer } from "react-icons/fa";
 import { GoPlus } from "react-icons/go";
+import ImgHamster from "../images/animals/hamster.png";
 
 const url = "http://localhost:3000/";
 
@@ -114,7 +115,9 @@ class Categories extends Component {
             <div className="container">
               <br />
               <div className="container_title">
+              <img src={ImgHamster} height="50" />
                 <h1>CATEGORÍAS</h1>
+                <div className="span">***</div>
                 <button
                   className="btn btn-outline-danger"
                   onClick={() => {
@@ -143,7 +146,7 @@ class Categories extends Component {
                         <td>{category.name}</td>
                         <td>
                           <button
-                            className="btn btn-primary"
+                            className="btn btn-info"
                             onClick={() => {
                               this.selectCategory(category);
                               this.modalInsert();
@@ -172,7 +175,7 @@ class Categories extends Component {
           </Card.Body>
         </Card>
 
-        <Modal isOpen={this.state.modalInsert}>
+        <Modal isOpen={this.state.modalInsert} centered>
           <ModalBody>
             <div className="error">{this.state.message}</div>
             <div className="form-group">
@@ -196,20 +199,20 @@ class Categories extends Component {
                 onChange={this.handleChange}
                 value={form ? form.name : ""}
               />
-              <br />
+            
             </div>
           </ModalBody>
           <ModalFooter>
             {this.state.typeModal === "Insert" ? (
               <button
-                className="btn btn-primary"
+                className="btn btn-info"
                 onClick={() => this.requestPost()}
               >
                 Insertar
               </button>
             ) : (
               <button
-                className="btn btn-primary"
+                className="btn btn-info"
                 onClick={() => this.requestPut()}
               >
                 Actualizar
@@ -224,7 +227,7 @@ class Categories extends Component {
           </ModalFooter>
         </Modal>
 
-        <Modal isOpen={this.state.modalDelete}>
+        <Modal isOpen={this.state.modalDelete} centered>
           <ModalBody>
             ¿Estás seguro que deseas eliminar {form && form.name}?
           </ModalBody>

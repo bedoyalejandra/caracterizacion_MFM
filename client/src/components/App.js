@@ -7,7 +7,7 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/types" component={Input} />
+        <Route exact path="/" component={Input} />
         <Route component={NotFound} />
 
       </Switch>
